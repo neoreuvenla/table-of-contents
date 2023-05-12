@@ -11,7 +11,7 @@
       <input type="submit" value="Generate TOC">
     </form>
     <h2>Table of Contents</h2>
-    <div id="toc"></div>
+    <textarea id="toc" rows="10" cols="30" readonly></textarea>
 
     <script>
       document.getElementById('markdown-form').addEventListener('submit', function(event) {
@@ -48,7 +48,7 @@
         }
 
         // Insert the table of contents into the page
-        document.getElementById('toc').innerText = tocHTML;
+        document.getElementById('toc').value = tocHTML;
       });
     </script>
 
