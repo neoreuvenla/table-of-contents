@@ -17,7 +17,7 @@
       }
 
       #header-image {
-        max-width: 100%;
+        width: 75%;
         height: auto;
       }
 
@@ -39,17 +39,21 @@
         font-size: 0.8em;
         margin-top: 20px;
       }
+
+      label {
+        font-weight: bold;
+      }
+
     </style>
   </head>
   <body>
     <img id="header-image" src="img/header.jpg" alt="Header Image">
-    <h1>Markdown Table of Contents Generator</h1>
     <form id="markdown-form">
       <label for="markdown">Paste your markdown here:</label><br>
       <textarea id="markdown" name="markdown" rows="10" cols="30"></textarea><br>
       <input id="submit-button" type="submit" value="Generate TOC">
     </form>
-    <h2>Table of Contents</h2>
+    <label for="toc">Table of contents:</label>
     <textarea id="toc" rows="10" cols="30" readonly></textarea>
 
     <p id="github-link">Hosted on GitHub pages</p>
