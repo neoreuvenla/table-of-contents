@@ -6,47 +6,69 @@
       body {
         background-color: #FFD6D7;
         font-family: Helvetica, Arial, sans-serif;
+        color: #222222;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+      }
+
+      #header-image {
+        max-width: 100%;
+        height: auto;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #submit-button {
+        background-color: #222222;
+        color: #FFD6D7;
+        padding: 10px;
+        font-size: 1.2em;
+        margin-top: 10px;
+      }
+
+      #github-link {
+        font-size: 0.8em;
+        margin-top: 20px;
       }
     </style>
   </head>
   <body>
+    <img id="header-image" src="img/header.jpg" alt="Header Image">
     <h1>Markdown Table of Contents Generator</h1>
     <form id="markdown-form">
       <label for="markdown">Paste your markdown here:</label><br>
       <textarea id="markdown" name="markdown" rows="10" cols="30"></textarea><br>
-      <input type="submit" value="Generate TOC">
+      <input id="submit-button" type="submit" value="Generate TOC">
     </form>
     <h2>Table of Contents</h2>
     <textarea id="toc" rows="10" cols="30" readonly></textarea>
 
+    <p id="github-link">Hosted on GitHub pages</p>
+
     <script>
       document.getElementById('markdown-form').addEventListener('submit', function(event) {
-        // Prevent the form from submitting normally
         event.preventDefault();
-
-        // Get the markdown text from the form
         var markdown = document.getElementById('markdown').value;
-
-        // Split the markdown into lines
         var lines = markdown.split('\n');
-
-        // Initialize an empty array to hold our table of contents
         var toc = [];
-
-        // Loop over each line
         for (var i = 0; i < lines.length; i++) {
-          // Check if the line is a header
           var match = lines[i].match(/^(#{1,6})\s(.+)/);
           if (match) {
-            // If it is, add it to the table of contents
             var level = match[1].length;
             var text = match[2];
             var link = text.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s/g, '-');
             toc.push({ level: level, text: text, link: link });
           }
         }
-
-        // Generate the HTML for the table of contents
         var tocHTML = '';
         for (var i = 0; i < toc.length; i++) {
           var indent = '- ';
@@ -55,11 +77,8 @@
           }
           tocHTML += indent + '[' + toc[i].text + '](#' + toc[i].link + ')\n';
         }
-
-        // Insert the table of contents into the page
         document.getElementById('toc').value = tocHTML;
       });
     </script>
-
   </body>
 </html>
