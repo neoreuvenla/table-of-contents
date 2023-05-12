@@ -43,8 +43,11 @@
         // Generate the HTML for the table of contents
         var tocHTML = '';
         for (var i = 0; i < toc.length; i++) {
-          var indent = ' '.repeat((toc[i].level - 1) * 2);
-          tocHTML += indent + '- [' + toc[i].text + '](#' + toc[i].link + ')\n';
+          var indent = '- ';
+          if (toc[i].level > 1) {
+            indent = Array(toc[i].level).join('  ') + '* ';
+          }
+          tocHTML += indent + '[' + toc[i].text + '](#' + toc[i].link + ')\n';
         }
 
         // Insert the table of contents into the page
