@@ -12,6 +12,45 @@
     </form>
     <h2>Table of Contents</h2>
     <div id="toc"></div>
+
+    <script>
+      document.getElementById('markdown-form').addEventListener('submit', function(event) {
+        // Prevent the form from submitting normally
+        event.preventDefault();
+
+        // Get the markdown text from the form
+        var markdown = document.getElementById('markdown').value;
+
+        // Split the markdown into lines
+        var lines = markdown.split('\n');
+
+        // Initialize an empty array to hold our table of contents
+        var toc = [];
+
+        // Loop over each line
+        for (var i = 0; i < lines.length; i++) {
+          // Check if the line is a header
+          var match = lines[i].match(/^(#{1,6})\s(.+)/);
+          if (match) {
+            // If it is, add it to the table of contents
+            var level = match[1].length;
+            var text = match[2];
+            var link = text.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s/g, '-');
+            toc.push({ level: level, text: text, link: link });
+          }
+        }
+
+        // Generate the HTML for the table of contents
+        var tocHTML = '';
+        for (var i = 0; i < toc.length; i++) {
+          var indent = ' '.repeat((toc[i].level - 1) * 2);
+          tocHTML += indent + '- [' + toc[i].text + '](#' + toc[i].link + ')\n';
+        }
+
+        // Insert the table of contents into the page
+        document.getElementById('toc').innerText = tocHTML;
+      });
+    </script>
+
   </body>
 </html>
-
