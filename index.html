@@ -4,9 +4,9 @@
     <title>Markdown TOC Generator</title>
     <style>
       body {
-        background-color: #FFD6D7;
+        background-color: #FED6D7;
         font-family: Helvetica, Arial, sans-serif;
-        color: #222222;
+        color: #333333;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -17,31 +17,50 @@
       }
 
       #header-image {
-        width: 75%;
+        width: 100%;
+        max-width: 500px;
         height: auto;
       }
-
-      form {
+      
+      form, #toc-container {
+        max-width: 600px;
+        width: 80%;
+        padding: 20px;
+        box-sizing: border-box;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
+      }
+
+      label {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 20px;
       }
 
       #submit-button {
         background-color: #222222;
-        color: #FFD6D7;
+        color: #FED6D7;
         padding: 10px;
         font-size: 1.2em;
         margin-top: 10px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      #submit-button:hover {
+        background-color: #0056b3;
       }
 
       #github-link {
         font-size: 0.8em;
         margin-top: 20px;
-      }
-
-      label {
-        font-weight: bold;
       }
 
     </style>
@@ -50,11 +69,13 @@
     <img id="header-image" src="img/header.jpg" alt="Header Image">
     <form id="markdown-form">
       <label for="markdown">Paste your markdown here:</label><br>
-      <textarea id="markdown" name="markdown" rows="10" cols="30"></textarea><br>
+      <textarea id="markdown" name="markdown" rows="10"></textarea><br>
       <input id="submit-button" type="submit" value="Generate TOC">
     </form>
-    <label for="toc">Table of contents:</label>
-    <textarea id="toc" rows="10" cols="30" readonly></textarea>
+    <div id="toc-container">
+      <label for="toc">Table of contents:</label>
+      <textarea id="toc" rows="10" readonly></textarea>
+    </div>
 
     <p id="github-link">Hosted on GitHub pages</p>
 
